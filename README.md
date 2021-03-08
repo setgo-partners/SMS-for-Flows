@@ -72,5 +72,11 @@ Open the scratch org in the browser
 
 TODO
 
-- From /Workspaces/
-  - `force:project:create -n SMS-for-Flows-Workspace -p DEFAULTPACKAGEDIR`
+- From /Workspace/
+  - `force:project:create -n SMS-for-Flows-Workspace -p SMS-for-Flows`
+
+```text
+/Workspace
+  /SMS-for-Flows-Workspace
+    /SMS-for-Flows
+```
