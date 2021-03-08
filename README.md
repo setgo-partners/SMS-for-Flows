@@ -69,3 +69,7 @@ Create a scratch org
 Open the scratch org in the browser
 
 - `sfdx force:org:open -u MyScratchOrg`
+
+TODO
+
+- `force:project:create -n SMS-for-Flows`
