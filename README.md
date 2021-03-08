@@ -10,3 +10,62 @@ This package requires some post-installation configuration. These steps have bee
 
 - [AppExchange Listing](https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3A00000FeF9YUAV)
 - [SMS for Flows Implementation and User Guide](https://appexchange.salesforce.com/servlet/servlet.FileDownload?file=00P3A00000gAwX0UAK)
+
+---
+
+## Salesforce Packaging
+
+A packaging org is a Developer Edition org configured with a managed package namespace. The packaging org is where new versions of the package are created. Every managed package has one and only one packaging org.
+
+- So basically I think I have...
+  - One Org set as the Dev Hub Org (this needs to be enabled)
+    - This is likely a Dev Org but watch out for API/version restrictions?
+  - Then I create a separate Dev Org as the 'Packaging Org'
+    - This is where I create the namespace and push changes to
+
+Created PHY3
+
+- This is my 'Packaging Org' which is where the namespace is registered
+- Did NOT enable Dev Hub
+- Registered the namespace `SetGoTwilioTest`: <https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_dev2gp_create_namespace.htm>
+
+Then from the Dev Hub Org I link the namespace. When you get the popup to login you use the credentials from the Packaging Org.
+
+Packaging Useful Links
+
+- [Link a Namespace to a Dev Hub Org](https://help.salesforce.com/articleView?id=sf.sfdx_dev_reg_namespace.htm)
+
+```bash
+sfdx force:project:create --outputdir expense-manager-workspace --projectname expenser-app --defaultpackagedir source-folder
+
+sfdx force:project:create --outputdir . --projectname expenser-app2 --defaultpackagedir source-folder
+
+sfdx force:org:open --targetusername whenke@phy.com --path lightning/setup/Package/home
+```
+
+FlowSMSLab namesace prefix: `flowsmslab`
+I'll use: `setgosmsforflow`
+
+Log into Dev Hub
+
+- `sfdx auth:web:login -d -a Phy2-DevHub`
+- `sfdx auth:web:login -a Phy3`
+- > Successfully authorized whenke@phy.com with org ID 00D4x000005RG77EAG
+- `-d` is for default hub
+- `-a` will then also set an alias
+
+Example commands
+
+- Open the DevHub: `sfdx force:org:open -u Phy2-DevHub`
+- `sfdx force:limits:api:display -u Phy2-DevHub`
+- `sfdx force:org:list --verbose --all`
+
+Create a scratch org
+
+- `sfdx force:org:create -s -f config/project-scratch-def.json`
+- `sfdx force:org:create -s -f config/project-scratch-def.json`
+- `sfdx force:org:create edition=Developer -s -a MyScratchOrg -v PHY2-Dev-ED`
+
+Open the scratch org in the browser
+
+- `sfdx force:org:open -u MyScratchOrg`
