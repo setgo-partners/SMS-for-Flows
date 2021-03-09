@@ -1,6 +1,6 @@
 # List files or directories below to ignore them when running force:source:push, force:source:pull, and force:source:status
 # More information: https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_exclude_source.htm
-#
+# .forceignore v2
 
 package.xml
 
@@ -12,8 +12,10 @@ package.xml
 **/__tests__/**
 
 AppBrand.app
-**/*PasswordPolicy*
+# **/*PasswordPolicy*
 standard__LightningSales
-**profilePasswordPolicy**
-**profileSessionSetting**
-**profile
+*profilePasswordPolicy*
+*profileSessionSetting*
+*profile*
+
+force-app/main/default/appMenus/AppSwitcher.appMenu**
