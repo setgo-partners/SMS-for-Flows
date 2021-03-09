@@ -118,6 +118,7 @@ Ok, just going to delete this scratch org and retry
 - `sfdx force:org:open -u MyScratchOrg`
 - `sfdx force:source:push -u MyScratchOrg --loglevel trace`
 - `sfdx force:source:status`
+- `sfdx force:source:pull -u MyScratchOrg --loglevel trace`
 
 Seems like...
 
