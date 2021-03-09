@@ -81,11 +81,8 @@ TODO
 `sfdx force:package:install -p 04t46000001DnYm -w 3`
 
 ```bash
-sfdx force:mdapi:retrieve -r ./mdAPIZip -u Caropreso-Partial -k ./package.xml
-This one worked better
-sfdx force:mdapi:retrieve -s -r ./mdapipkg -u Caropreso-Partial -p FlowSMSLab
-
-sfdx force:mdapi:convert --rootdir ./mdapipkg/unpackaged --outputdir ./force-app
-This one worked better
+# Example retrieving metadata from an org
+sfdx force:mdapi:retrieve -s -r ./metadata -u <some alias here> -p FlowSMSLab
+# Example converting metadata to source format
 sfdx force:mdapi:convert --rootdir ./metadata --outputdir ./force-app
 ```
