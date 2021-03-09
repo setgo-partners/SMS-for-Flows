@@ -124,6 +124,31 @@ Convert from source format to metadata format and deploy to the 'Packaging Org' 
 
 ---
 
+Random
+
+- Set scratch org user password: `sfdx force:user:password:generate -u MyScratchOrg`
+  - Then can see login url with: `sfdx force:user:display`
+- This might be easier than I thought, the Twilio configs are stored in a Hierarchal Custom Setting which means it can be set per org, profile, or user. The more specific value takes precedence
+  - <https://help.salesforce.com/articleView?id=sf.cs_define.htm&type=5>
+  - Might not have to edit the Twilio SMS Flow page, these custom settings can be set from: `Setup -> Custom Code -> Custom Settings`
+    - Click 'Manage' and then you can set values for a user, profile, or Default Organization Level
+    - If a user doesn't have a field set it will use a value from either a profile or the org default
+- Apex code to test
+
+  ```java
+  TwilioCredentials__c orgDefaultCreds = TwilioCredentials__c.getOrgDefaults();
+  System.debug('Twilio - Org Default Account Id: ' + orgDefaultCreds.SetGoTwilioTest__Account_Id__c);
+  System.debug('Twilio Creds - Org Default API Key: ' + orgDefaultCreds.SetGoTwilioTest__API_Key__c);
+  System.debug('Twilio Creds - Org Default API Secret: ' + orgDefaultCreds.SetGoTwilioTest__API_Secret__c);
+  System.debug('Twilio Creds - Org Default Outbound Number: ' + orgDefaultCreds.SetGoTwilioTest__Outbound_Number__c);
+
+  TwilioCredentials__c userCreds = TwilioCredentials__c.getInstance('0051h000005utiHAAQ');
+  System.debug('Twilio - User Account Id: ' + userCreds.SetGoTwilioTest__Account_Id__c);
+  System.debug('Twilio - User API Key: ' + userCreds.SetGoTwilioTest__API_Key__c);
+  System.debug('Twilio - User API Secret: ' + userCreds.SetGoTwilioTest__API_Secret__c);
+  System.debug('Twilio - User Outbound Number: ' + userCreds.SetGoTwilioTest__Outbound_Number__c);
+  ```
+
 Manual changes needed after install (todo make this not manual)
 
 - Update System Administrator Profile: `Custom Tab Settings -> Flow SMS Setup = Default On`
