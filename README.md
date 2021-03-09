@@ -119,8 +119,17 @@ Ok, just going to delete this scratch org and retry
 - `sfdx force:source:status`
 - `sfdx force:source:pull -u MyScratchOrg --loglevel trace`
 
-Seems like...
+Convert from source format to metadata format and deploy to the 'Packaging Org' (Phy3)
+
+- `sfdx force:source:convert --outputdir SetGoTwilioTest --packagename SetGoTwilioTest`
+- `sfdx force:mdapi:deploy --deploydir SetGoTwilioTest -u Phy3`
+- `sfdx force:mdapi:deploy:report -u Phy3 -i 0Af5Y000005rkMaSAI`
+  - The alias is needed since this isn't the default but the job id isn't normally needed since the latest job id is cached locally and used if omitted
+
+Order of operations seems like...
 
 - Make changes to source files locally
 - Push source code to scratch org
-- Then pull meta data and push that to the packaging org?
+- Pull meta data and push that to the packaging org
+- From the packaging org go to `Setup -> Package Manager` and upload the package
+  - This will create a URL that can then be used to install the package
