@@ -73,10 +73,23 @@ Open the scratch org in the browser
 TODO
 
 - From /Workspace/
-  - `force:project:create -n SMS-for-Flows-Workspace -p SMS-for-Flows`
+  - `sfdx force:project:create -n SMS-for-Flows`
+- Kept the existing folder structure
 
-```text
-/Workspace
-  /SMS-for-Flows-Workspace
-    /SMS-for-Flows
+`sfdx force:source:push`
+
+`sfdx force:package:install -p 04t46000001DnYm -w 3`
+
+```json
+{
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "default": true
+    }
+  ],
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "51.0"
+}
 ```
