@@ -94,7 +94,30 @@ Had to open: `Setup -> Apps -> App Manager` and edit the Lightning enabled Sales
 Nevermind this didn't help. From App Manager I had to create a new app and select the visual force page
 Then updated the System Administrator profile. Enable Custom Tab Setting for Flow SMS Setup
 
-Pull source code from scratch org: ``
+Pull source code from scratch org: `sfdx force:source:pull -u MyScratchOrg --loglevel trace`
+
+Issues pulling source
+
+- <https://github.com/forcedotcom/cli/issues/205>
+- `sfdx force:data:soql:query -q "Select Id, MemberName From SourceMember Where MemberType = 'CustomApplication'" -t`
+  - > `0MZ1k00000BgttFGAR  AppBrand`
+- `sfdx force:data:record:delete -u MyScratchOrg -s SourceMember -i 0MZ1k00000BgttFGAR -t`
+- Nevermind this still didn't work
+- Adding `AppBrand.app` to .forceignore did work (for the pull at least, tbd on the next push)
+
+After adding that to .forceignore sfdx got confused...
+
+- `sfdx force:source:tracking:clear -u MyScratchOrg --loglevel trace`
+
+Pull source code from scratch org attempt 2: `sfdx force:source:pull -u MyScratchOrg --loglevel trace --forceoverwrite`
+
+Ok, just going to delete this scratch org and retry
+
+- `sfdx force:org:delete -u MyScratchOrg`
+- `sfdx force:org:create edition=Developer -s -a MyScratchOrg -v PHY2-Dev-ED`
+- `sfdx force:org:open -u MyScratchOrg`
+- `sfdx force:source:push -u MyScratchOrg --loglevel trace`
+- `sfdx force:source:status`
 
 Seems like...
 

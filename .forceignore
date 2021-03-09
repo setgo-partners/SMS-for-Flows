@@ -10,3 +10,10 @@ package.xml
 
 # LWC Jest
 **/__tests__/**
+
+AppBrand.app
+**/*PasswordPolicy*
+standard__LightningSales
+**profilePasswordPolicy**
+**profileSessionSetting**
+**profile
