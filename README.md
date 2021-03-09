@@ -86,3 +86,18 @@ sfdx force:mdapi:retrieve -s -r ./metadata -u <some alias here> -p FlowSMSLab
 # Example converting metadata to source format
 sfdx force:mdapi:convert --rootdir ./metadata --outputdir ./force-app
 ```
+
+Push source code to scratch org: `sfdx force:source:push -u MyScratchOrg --loglevel trace`
+
+Had to open: `Setup -> Apps -> App Manager` and edit the Lightning enabled Sales app `App Settings -> Navigation Items` and add Flow SMS Setup
+  I un did this
+Nevermind this didn't help. From App Manager I had to create a new app and select the visual force page
+Then updated the System Administrator profile. Enable Custom Tab Setting for Flow SMS Setup
+
+Pull source code from scratch org: ``
+
+Seems like...
+
+- Make changes to source files locally
+- Push source code to scratch org
+- Then pull meta data and push that to the packaging org?
