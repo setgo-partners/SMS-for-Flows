@@ -80,16 +80,12 @@ TODO
 
 `sfdx force:package:install -p 04t46000001DnYm -w 3`
 
-```json
-{
-  "packageDirectories": [
-    {
-      "path": "force-app",
-      "default": true
-    }
-  ],
-  "namespace": "",
-  "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "51.0"
-}
+```bash
+sfdx force:mdapi:retrieve -r ./mdAPIZip -u Caropreso-Partial -k ./package.xml
+This one worked better
+sfdx force:mdapi:retrieve -s -r ./mdapipkg -u Caropreso-Partial -p FlowSMSLab
+
+sfdx force:mdapi:convert --rootdir ./mdapipkg/unpackaged --outputdir ./force-app
+This one worked better
+sfdx force:mdapi:convert --rootdir ./metadata --outputdir ./force-app
 ```
