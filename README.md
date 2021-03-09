@@ -89,10 +89,6 @@ sfdx force:mdapi:convert --rootdir ./metadata --outputdir ./force-app
 
 Push source code to scratch org: `sfdx force:source:push -u MyScratchOrg --loglevel trace`
 
-Add the Flow SMS Setup page
-From App Manager I had to create a new app and select the visual force page: `Flow SMS Setup`
-Then updated the System Administrator profile. Enable Custom Tab Setting for Flow SMS Setup
-
 Pull source code from scratch org: `sfdx force:source:pull -u MyScratchOrg --loglevel trace`
 
 Issues pulling source
@@ -125,6 +121,12 @@ Convert from source format to metadata format and deploy to the 'Packaging Org' 
 - `sfdx force:mdapi:deploy --deploydir SetGoTwilioTest -u Phy3`
 - `sfdx force:mdapi:deploy:report -u Phy3 -i 0Af5Y000005rkMaSAI`
   - The alias is needed since this isn't the default but the job id isn't normally needed since the latest job id is cached locally and used if omitted
+
+---
+
+Manual changes needed after install (todo make this not manual)
+
+- Update System Administrator Profile: `Custom Tab Settings -> Flow SMS Setup = Default On`
 
 Order of operations seems like...
 
