@@ -10,6 +10,7 @@ public with sharing class TwilioServiceCredentialsController {
     public String APISecret {get; set;}
     public String outboundNumber {get; set;}
     public String accountId {get; set;}
+    public String userId {get; set;}
 
     public TwilioServiceCredentialsController() {
         loadCustomSettings();
