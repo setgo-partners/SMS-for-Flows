@@ -136,13 +136,16 @@ Random
 - Apex code to test
 
   ```java
+  User testUser = [SELECT Id FROM User WHERE Id = '0051h000005utiHAAQ'];
+  System.debug('Test User: ' + testUser);
+
   TwilioCredentials__c orgDefaultCreds = TwilioCredentials__c.getOrgDefaults();
   System.debug('Twilio - Org Default Account Id: ' + orgDefaultCreds.SetGoTwilioTest__Account_Id__c);
   System.debug('Twilio Creds - Org Default API Key: ' + orgDefaultCreds.SetGoTwilioTest__API_Key__c);
   System.debug('Twilio Creds - Org Default API Secret: ' + orgDefaultCreds.SetGoTwilioTest__API_Secret__c);
   System.debug('Twilio Creds - Org Default Outbound Number: ' + orgDefaultCreds.SetGoTwilioTest__Outbound_Number__c);
 
-  TwilioCredentials__c userCreds = TwilioCredentials__c.getInstance('0051h000005utiHAAQ');
+  TwilioCredentials__c userCreds = TwilioCredentials__c.getInstance(testUser.Id);
   System.debug('Twilio - User Account Id: ' + userCreds.SetGoTwilioTest__Account_Id__c);
   System.debug('Twilio - User API Key: ' + userCreds.SetGoTwilioTest__API_Key__c);
   System.debug('Twilio - User API Secret: ' + userCreds.SetGoTwilioTest__API_Secret__c);

@@ -31,7 +31,20 @@ public with sharing class TwilioUtil {
      *              Since it's hierarchy custom setting, can set user and profile level allowing different phone numbers for different users
      */
     public static TwilioCredentials__c getTwilioCredentials() {
+        System.debug('WJH: No user id so using the default getTwilioCredentials');
         TwilioCredentials__c creds = TwilioCredentials__c.getInstance();
+        return creds;
+    }
+
+    public static TwilioCredentials__c getTwilioCredentials(ID userId, Boolean fallbackToOrgDefaults) {
+        System.debug('WJH: User id was specified so using the new getTwilioCredentials');
+        System.debug('userId: ' + userId + ' fallbackToOrgDefaults: ' + fallbackToOrgDefaults);
+
+        TwilioCredentials__c creds = TwilioCredentials__c.getValues(userId);// A valid user with no Custom Settings will return null. A invalid userId will throw an exception
+        if (creds == null && fallbackToOrgDefaults) {
+          System.debug('Twilion Custom Settings not set for user. Using org defaults instead.');
+          creds = TwilioCredentials__c.getOrgDefaults();
+        }
         return creds;
     }
 

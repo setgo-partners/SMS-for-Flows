@@ -45,8 +45,15 @@ public with sharing class TwilioHttp {
         String boundary = TwilioUtil.getBoundary();
         //Get Twilio Endpoint information
         TwilioLabs__mdt twilioEndpoint = TwilioUtil.getTwilioEndpoint('Twilio');
+
+        TwilioCredentials__c twilioCredentials;
         //Get Twilio Credentials and PhoneNumber from custom setting
-        TwilioCredentials__c twilioCredentials = TwilioUtil.getTwilioCredentials();
+        if (msg.userId == null) {
+          twilioCredentials = TwilioUtil.getTwilioCredentials();
+        } else {
+          twilioCredentials = TwilioUtil.getTwilioCredentials(msg.userId, msg.fallbackToOrgDefaults);
+        }
+
         //Build url of API endpoint
         url = twilioEndpoint.Endpoint__c + '/' + twilioEndpoint.API_Version__c + '/Accounts/' + twilioCredentials.Account_Id__c + '/Messages.json';
         //Build the API key and secret for header
