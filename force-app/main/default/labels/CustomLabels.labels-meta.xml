@@ -49,11 +49,4 @@
         <shortDescription>Save</shortDescription>
         <value>Save</value>
     </labels>
-    <labels>
-      <fullName>Twilio_UserId</fullName>
-      <language>en_US</language>
-      <protected>true</protected>
-      <shortDescription>User Id</shortDescription>
-      <value>User ID</value>
-    </labels>
 </CustomLabels>
