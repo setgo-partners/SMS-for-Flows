@@ -128,3 +128,7 @@ Random
 Manual changes needed after install (todo make this not manual)
 
 - Update System Administrator Profile: `Custom Tab Settings -> Flow SMS Setup = Default On`
+- Will need to do this for all profiles since each user will manage their own
+- `Setup -> Custom Code -> Visualforce Page -> TwilioServiceCredentials`
+  - Give access to Standard User
+  - Would like to bake this into the install process
