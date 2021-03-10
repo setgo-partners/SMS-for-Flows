@@ -30,21 +30,21 @@ public with sharing class TwilioUtil {
      * Description: returns the custom setting that stores api key, api secret and from phone number
      *              Since it's hierarchy custom setting, can set user and profile level allowing different phone numbers for different users
      */
-    public static TwilioCredentials__c getTwilioCredentials() {
-        System.debug('WJH: No user id so using the default getTwilioCredentials');
-        TwilioCredentials__c creds = TwilioCredentials__c.getInstance();
-        return creds;
-    }
+    public static TwilioCredentials__c getTwilioCredentials(TwilioMessage msg) {
+        TwilioCredentials__c creds;
 
-    public static TwilioCredentials__c getTwilioCredentials(ID userId, Boolean fallbackToOrgDefaults) {
-        System.debug('WJH: User id was specified so using the new getTwilioCredentials');
-        System.debug('userId: ' + userId + ' fallbackToOrgDefaults: ' + fallbackToOrgDefaults);
-
-        TwilioCredentials__c creds = TwilioCredentials__c.getValues(userId);// A valid user with no Custom Settings will return null. A invalid userId will throw an exception
-        if (creds == null && fallbackToOrgDefaults) {
-          System.debug('Twilion Custom Settings not set for user. Using org defaults instead.');
+        if (msg.userId == null) {
+          System.debug('No user ID specified, getting the Org default Twilio credentials');
           creds = TwilioCredentials__c.getOrgDefaults();
+        } else {
+          System.debug('Getting Twilio credentials for userId: ' + msg.userId);
+          creds = TwilioCredentials__c.getValues(msg.userId);
+          if ((creds == null) && (msg.fallbackToOrgDefaults == true)) {
+            System.debug('userId ' + msg.userId + ' has not configured their Twilio account. Using the Org defaults.');
+            creds = TwilioCredentials__c.getOrgDefaults();
+          }
         }
+
         return creds;
     }
 
