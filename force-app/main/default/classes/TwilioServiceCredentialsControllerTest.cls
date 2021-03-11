@@ -9,17 +9,12 @@
 public without sharing class TwilioServiceCredentialsControllerTest {
     
     static testmethod void controllerTestMethod() {
-
-        PageReference pageRef = Page.TwilioServiceCredentials;
-        Test.setCurrentPage(pageRef);
-        Test.startTest();
-
+        // Test setup
         Profile p = [SELECT Id FROM Profile WHERE Name='System Administrator' limit 1];
-
         User testUser = new user();
         testUser.LastName = 'UnitTests';
         testUser.Email = 'test@test.com';
-        testUser.Alias = 'UnitTests';
+        testUser.Alias = 'UnitTest';
         testUser.Username = 'setgoTwilioTest54687521@test.com';
         testUser.CommunityNickname = 'test12';
         testUser.LocaleSidKey = 'en_US';
@@ -38,6 +33,10 @@ public without sharing class TwilioServiceCredentialsControllerTest {
         credsBefore.Account_Id__c = 'OLD VALUE ACCOUNT ID';
         insert credsBefore;
 
+        PageReference pageRef = Page.TwilioServiceCredentials;
+        Test.setCurrentPage(pageRef);
+        Test.startTest();
+
         TwilioServiceCredentialsController controller = new TwilioServiceCredentialsController();
         controller.APIKey = 'ABC123';
         controller.APISecret = 'XYZ123';
@@ -53,6 +52,5 @@ public without sharing class TwilioServiceCredentialsControllerTest {
         system.assertEquals('ABCDEF', credsAfter.Account_Id__c);
         controller.cancelCustomSettings();
         Test.stopTest();
-
     }
 }
