@@ -6,7 +6,7 @@
  */
  
 @IsTest
-public with sharing class TwilioServiceCredentialsControllerTest {
+public without sharing class TwilioServiceCredentialsControllerTest {
     
     static testmethod void controllerTestMethod() {
 
@@ -14,8 +14,20 @@ public with sharing class TwilioServiceCredentialsControllerTest {
         Test.setCurrentPage(pageRef);
         Test.startTest();
 
+        Profile p = [SELECT Id FROM Profile WHERE Name='System Administrator' limit 1];
+
         User testUser = new user();
-        testUser.Id = '0051h000005utiHAAQ';
+        testUser.LastName = 'UnitTests';
+        testUser.Email = 'test@test.com';
+        testUser.Alias = 'UnitTests';
+        testUser.Username = 'setgoTwilioTest54687521@test.com';
+        testUser.CommunityNickname = 'test12';
+        testUser.LocaleSidKey = 'en_US';
+        testUser.TimeZoneSidKey = 'GMT';
+        testUser.ProfileID = p.id;
+        testUser.LanguageLocaleKey = 'en_US';
+        testUser.EmailEncodingKey = 'UTF-8';
+        insert testUser;
 
         TwilioCredentials__c credsBefore = new TwilioCredentials__c();
         credsBefore.Name = testUser.Id;
