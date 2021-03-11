@@ -20,6 +20,7 @@ Created PHY3
 - This is my 'Packaging Org' which is where the namespace is registered
 - Did NOT enable Dev Hub
 - Registered the namespace `SetGoTwilioTest`: <https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_dev2gp_create_namespace.htm>
+  - Don't think I need this for an unmanaged package
 
 Then from the Dev Hub Org I link the namespace. When you get the popup to login you use the credentials from the Packaging Org.
 
@@ -90,15 +91,15 @@ Ok, just going to delete this scratch org and retry
 
 Convert from source format to metadata format and deploy to the 'Packaging Org' (Phy3)
 
-- `sfdx force:source:convert --outputdir SetGoTwilioTest --packagename SetGoTwilioTest`
-- `sfdx force:mdapi:deploy --deploydir SetGoTwilioTest -u Phy3`
-- `sfdx force:mdapi:deploy:report -u Phy3 -i 0Af5Y000005rkMaSAI`
-  - The alias is needed since this isn't the default but the job id isn't normally needed since the latest job id is cached locally and used if omitted
+- `sfdx force:source:convert --outputdir FlowSMSSetGo --packagename FlowSMSSetGo`
+- `sfdx force:mdapi:deploy --deploydir FlowSMSSetGo -u Phy3`
+- `sfdx force:mdapi:deploy:report -u Phy3`
 
 ---
 
 Random
 
+- The package from Salesforce Labs is named `FlowSMSLab`. Naming ours `FlowSMSSetGo`
 - Set scratch org user password: `sfdx force:user:password:generate -u MyScratchOrg`
   - Then can see login url with: `sfdx force:user:display`
 - This might be easier than I thought, the Twilio configs are stored in a Hierarchal Custom Setting which means it can be set per org, profile, or user. The more specific value takes precedence
@@ -113,16 +114,16 @@ Random
   System.debug('Test User: ' + testUser);
 
   TwilioCredentials__c orgDefaultCreds = TwilioCredentials__c.getOrgDefaults();
-  System.debug('Twilio - Org Default Account Id: ' + orgDefaultCreds.SetGoTwilioTest__Account_Id__c);
-  System.debug('Twilio Creds - Org Default API Key: ' + orgDefaultCreds.SetGoTwilioTest__API_Key__c);
-  System.debug('Twilio Creds - Org Default API Secret: ' + orgDefaultCreds.SetGoTwilioTest__API_Secret__c);
-  System.debug('Twilio Creds - Org Default Outbound Number: ' + orgDefaultCreds.SetGoTwilioTest__Outbound_Number__c);
+  System.debug('Twilio - Org Default Account Id: ' + orgDefaultCreds.FlowSMSSetGo__Account_Id__c);
+  System.debug('Twilio Creds - Org Default API Key: ' + orgDefaultCreds.FlowSMSSetGo__API_Key__c);
+  System.debug('Twilio Creds - Org Default API Secret: ' + orgDefaultCreds.FlowSMSSetGo__API_Secret__c);
+  System.debug('Twilio Creds - Org Default Outbound Number: ' + orgDefaultCreds.FlowSMSSetGo__Outbound_Number__c);
 
   TwilioCredentials__c userCreds = TwilioCredentials__c.getInstance(testUser.Id);
-  System.debug('Twilio - User Account Id: ' + userCreds.SetGoTwilioTest__Account_Id__c);
-  System.debug('Twilio - User API Key: ' + userCreds.SetGoTwilioTest__API_Key__c);
-  System.debug('Twilio - User API Secret: ' + userCreds.SetGoTwilioTest__API_Secret__c);
-  System.debug('Twilio - User Outbound Number: ' + userCreds.SetGoTwilioTest__Outbound_Number__c);
+  System.debug('Twilio - User Account Id: ' + userCreds.FlowSMSSetGo__Account_Id__c);
+  System.debug('Twilio - User API Key: ' + userCreds.FlowSMSSetGo__API_Key__c);
+  System.debug('Twilio - User API Secret: ' + userCreds.FlowSMSSetGo__API_Secret__c);
+  System.debug('Twilio - User Outbound Number: ' + userCreds.FlowSMSSetGo__Outbound_Number__c);
   ```
 
 Manual changes needed after install (todo make this not manual)
