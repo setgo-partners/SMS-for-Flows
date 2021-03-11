@@ -15,14 +15,15 @@ public with sharing class TwilioUtilTest {
     }
 
     static testMethod void credentialsMethod() {
-        TwilioCredentials__c creds = TwilioUtil.getTwilioCredentials();
+        TwilioMessage msg = new TwilioMessage();
+        TwilioCredentials__c creds = TwilioUtil.getTwilioCredentials(msg);
         system.assertEquals('ASFDAFAFAFAFDA', creds.API_Key__c);
     }
 
     static testMethod void buildMessageTests() {
-        TwilioCredentials__c creds = TwilioUtil.getTwilioCredentials();
-        Test.startTest();
         TwilioMessage msg = new TwilioMessage();
+        TwilioCredentials__c creds = TwilioUtil.getTwilioCredentials(msg);
+        Test.startTest();
         msg.toNumber = '5555555555';
         msg.messageBody = 'Test Message';
         String testMessage = TwilioUtil.buildMessageText(msg, creds);

@@ -11,6 +11,7 @@ public with sharing class TwilioServiceCredentialsController {
     public String outboundNumber {get; set;}
     public String accountId {get; set;}
     public String userName {get; set;} // Only used for the page header to indicate which user is being configured
+    public String userId {get; set;}
 
     public TwilioServiceCredentialsController() {
         loadCustomSettings();
@@ -18,8 +19,9 @@ public with sharing class TwilioServiceCredentialsController {
 
     public void loadCustomSettings() {
         userName = UserInfo.getName();
+        userId = UserInfo.getUserId();
 
-        TwilioCredentials__c creds = TwilioCredentials__c.getValues(UserInfo.getUserId());
+        TwilioCredentials__c creds = TwilioCredentials__c.getValues(userId);
         if (creds != null) {
           APIKey = creds.API_Key__c;
           APISecret = creds.API_Secret__c;
@@ -30,12 +32,12 @@ public with sharing class TwilioServiceCredentialsController {
 
     public PageReference saveCustomSettings() {
         try {
-          TwilioCredentials__c creds = TwilioCredentials__c.getValues(UserInfo.getUserId());
+          TwilioCredentials__c creds = TwilioCredentials__c.getValues(userId);
 
           if (creds == null) {// First time setup
             creds = new TwilioCredentials__c();
-            creds.Name = UserInfo.getUserId();
-            creds.SetupOwnerId = UserInfo.getUserId();
+            creds.Name = userId;
+            creds.SetupOwnerId = userId;
           }
 
           creds.API_Key__c = APIKey;
